@@ -3,15 +3,14 @@ import { ExternalLink, BookOpen, Bookmark } from 'lucide-react';
 
 const Question3 = () => {
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-8 pb-12 text-right">
       
       {/* Uniform Question Header Layout */}
       <div className="border-b-2 border-stone-800/20 pb-4 space-y-3">
         <p className="text-stone-900 text-xl font-medium leading-relaxed">
           האם ליצור הזה (או לקרובי משפחתו) יש חשיבות רפואית, חקלאית או אקולוגית ידועה?
-        </p>
-        <p className="text-stone-900 text-xl font-medium leading-relaxed font-semibold">
-          הסבירו בקצרה.
+                    הסבירו בקצרה.
+
         </p>
       </div>
 
@@ -63,7 +62,7 @@ const Question3 = () => {
           לקסיקון מושגים מקצועיים
         </h3>
         
-        <div className="space-y-3 text-right">
+        <div className="space-y-3">
           <p className="text-base text-stone-800">
             <strong className="text-stone-950 font-semibold">אורגניזם מודל (Model organism):</strong> יצור חי שנחקר באופן אינטנסיבי במעבדות (כמו עכבר או זבוב פירות) כדי להבין תהליכים ביולוגיים כלליים, מתוך הנחה שהמנגנונים שנמצאים בו פועלים בצורה דומה גם ביצורים אחרים.
           </p>
