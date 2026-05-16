@@ -9,6 +9,7 @@ const TABS = [
     path: `/question-${i + 1}`,
     label: `שאלה ${i + 1}`,
   })),
+  { path: '/ai-usage', label: 'AI' },
   { path: '/appendices', label: 'נספחים' },
 ];
 
