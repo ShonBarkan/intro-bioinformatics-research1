@@ -1,68 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Outlet, useLocation, Link } from 'react-router-dom';
 import { Menu, X, Book } from 'lucide-react';
 
+// Added the Appendices (נספחים) tab at the end of the array
 const TABS = [
   { path: '/', label: 'כריכה' },
-  ...Array.from({ length: 11 }, (_, i) => ({
+  ...Array.from({ length: 10 }, (_, i) => ({
     path: `/question-${i + 1}`,
     label: `שאלה ${i + 1}`,
   })),
+  { path: '/appendices', label: 'נספחים' },
 ];
-
-// Helper to generate deterministic background image URLs based on the path
-const getBackgroundUrl = (path) => {
-  const hash = path.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return `https://picsum.photos/seed/${hash + 1000}/1920/1080`;
-};
 
 const NotebookLayout = () => {
   const location = useLocation();
-  const [bgUrl, setBgUrl] = useState(getBackgroundUrl(location.pathname));
-  const [prevBgUrl, setPrevBgUrl] = useState(null);
-  const [isFading, setIsFading] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const newBg = getBackgroundUrl(location.pathname);
-    if (newBg !== bgUrl) {
-      setPrevBgUrl(bgUrl);
-      setBgUrl(newBg);
-      setIsFading(true);
-    }
-  }, [location.pathname, bgUrl]);
-
-  // When the new image finishes loading, trigger the fade-in effect
-  const handleImageLoad = () => {
-    if (isFading) {
-      setTimeout(() => setIsFading(false), 50);
-    }
-  };
 
   return (
     <div className="relative min-h-screen w-full flex items-start justify-center bg-stone-900 font-sans pb-12">
-      {/* Fixed Full-Screen Background Images Crossfade Wrapper */}
+      {/* Injecting native desktop zoom scaling via isolated scoped CSS styles */}
+      <style>{`
+        @media (min-width: 768px) {
+          .notebook-desktop-zoom {
+            zoom: 0.8;
+          }
+        }
+      `}</style>
+
+      {/* Fixed Full-Screen Static Background Image */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        {prevBgUrl && (
-          <img
-            src={prevBgUrl}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
         <img
-          src={bgUrl}
-          alt=""
-          onLoad={handleImageLoad}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
-            isFading ? 'opacity-0' : 'opacity-100'
-          }`}
+          src="assets/background.png"
+          alt="Static Research Notebook Background"
+          className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
-      {/* Main Container - Allows natural vertical growth without inner overflow */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto pt-20 md:pt-12 px-4 md:px-8">
+      {/* Main Container - Forces custom 80% zoom look on desktop screens cleanly */}
+      <div className="relative z-10 w-full max-w-5xl mx-auto pt-20 md:pt-12 px-4 md:px-8 notebook-desktop-zoom">
         
         {/* Mobile Header (Visible only on small screens) */}
         <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-[#f4ecd8] border-b border-stone-300 shadow-md flex items-center justify-between px-4 z-50">
@@ -153,7 +129,7 @@ const NotebookLayout = () => {
                 linear-gradient(90deg, rgba(160, 150, 140, 0.1) 0%, transparent 5%, transparent 95%, rgba(160, 150, 140, 0.1) 100%),
                 linear-gradient(0deg, transparent 0%, rgba(160, 150, 140, 0.15) 1%, transparent 2%)
               `,
-              backgroundSize: '100% 100%, 100+ 28px'
+              backgroundSize: '100% 100%, 100% 28px'
             }}
           >
             {/* Spine shadow moved to the LEFT side since tabs are on the right */}

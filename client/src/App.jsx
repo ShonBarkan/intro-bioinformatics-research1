@@ -12,6 +12,7 @@ import Question8 from './pages/Question8';
 import Question9 from './pages/Question9';
 import Question10 from './pages/Question10';
 import Question11 from './pages/Question11';
+import Appendices from './pages/Appendices';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="question-9" element={<Question9 />} />
           <Route path="question-10" element={<Question10 />} />
           <Route path="question-11" element={<Question11 />} />
+          <Route path="appendices" element={<Appendices />} />
         </Route>
       </Routes>
     </BrowserRouter>
