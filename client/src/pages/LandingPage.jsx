@@ -36,7 +36,7 @@ const LandingPage = () => {
       {/* Vintage Classified Divider */}
       <div className="mt-4 border-t-2 border-b-2 border-stone-800/30 py-3 w-full max-w-md mx-auto">
         <p className="text-stone-950 font-mono text-xs font-bold tracking-widest uppercase" dir="ltr">
-          Laboratory Research Log
+          Research Log
         </p>
       </div>
 
